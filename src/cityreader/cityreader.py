@@ -75,12 +75,41 @@ for c in cities:
 
 # TODO Get latitude and longitude values from the user
 
-# def cityreader_stretch(lat1, lon1, lat2, lon2, cities=[]):
-#   # within will hold the cities that fall within the specified region
-#   within = []
+def cityreader_stretch(lat1, lon1, lat2, lon2, cities=[]):
+  # within will hold the cities that fall within the specified region
+  within = []
+  print(lat1, lon1, lat2, lon2)
+  for i in range(len(cities)):
+    lat = cities[i].lat
+    lon = cities[i].lon
+    # print(cities[i].name, lat, lon, lat1, lon1, lat2, lon2)
+    if lat1 < lat < lat2 and lon1 > lon > lon2:
+      within.append(City(cities[i].name, float(cities[i].lat), float(cities[i].lon)))
 
-#   # TODO Ensure that the lat and lon valuse are all floats
-#   # Go through each city and check to see if it falls within 
-#   # the specified coordinates.
+    elif lat1 < lat < lat2 and lon1 < lon < lon2:
+      within.append(City(cities[i].name, float(cities[i].lat), float(cities[i].lon)))
 
-#   return within
+    elif lat1 > lat > lat2 and lon1 > lon > lon2:
+      within.append(City(cities[i].name, float(cities[i].lat), float(cities[i].lon)))
+
+    elif lat1 > lat > lat2 and lon1 < lon < lon2:
+      within.append(City(cities[i].name, float(cities[i].lat), float(cities[i].lon)))
+    else:
+      # print(False)
+      pass
+  return within
+
+  # TODO Ensure that the lat and lon valuse are all floats
+  # Go through each city and check to see if it falls within 
+  # the specified coordinates.
+  # else:
+  #   print(False)
+
+
+userinput = (input("Please enter two points, each specified by latitude and longitute (separated by spaces): ").split())
+userinput = [float(x) for x in userinput]
+a = userinput[0]
+b = userinput[1]
+c = userinput[2]
+d = userinput[3]
+cityreader_stretch(a, b, c, d, cities)
